@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://purl.org/NET/erdf/profile">
+ <title>PHP: DOMNodeList - Manual</title>
+ <style type="text/css" media="all">
+  @import url("/styles/site.css");
+  @import url("/styles/mirror.css");
+  
+ </style>
+ <!--[if IE]><![if gte IE 6]><![endif]-->
+  <style type="text/css" media="print">
+   @import url("/styles/print.css");
+  </style>
+ <!--[if IE]><![endif]><![endif]-->
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+ <link rel="shortcut icon" href="/favicon.ico" />
+ <link rel="contents" href="index.php" />
+ <link rel="index" href="book.dom.php" />
+ <link rel="prev" href="domnode.replacechild.php" />
+ <link rel="next" href="domnodelist.item.php" />
+ <link rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
+ <link rel="schema.rdfs" href="http://www.w3.org/2000/01/rdf-schema#" />
+ <link rev="canonical" rel="self alternate shorter shorturl shortlink" href="http://php.net/domnodelist" />
+ <link rel="license" href="http://creativecommons.org/licenses/by/3.0/" about="#content" />
+ <link rel="alternate" href="/manual/en/feeds/class.domnodelist.atom" type="application/atom+xml" />
+ <link rel="canonical" href="http://php.net/manual/en/class.domnodelist.php" />
+ <script type="text/javascript" src="/userprefs.js"></script>
+ <base href="http://us1.php.net/manual/en/class.domnodelist.php" />
+ <meta http-equiv="Content-language" content="en" />
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var toggleImage = function(elem) {
+        if ($(elem).hasClass("shown")) {
+            $(elem).removeClass("shown").addClass("hidden");
+            $("img", elem).attr("src", "/images/notes-add.gif");
+        }
+        else {
+            $(elem).removeClass("hidden").addClass("shown");
+            $("img", elem).attr("src", "/images/notes-reject.gif");
+        }
+    };
+
+    $(".soft-deprecation-notice h1.title").each(function() {
+        $(this).prepend("<a class='toggler shown' href='#'><img src='/images/notes-reject.gif' alt='minimize' /></a> ");
+    });
+    $(".refsect1 h3.title").each(function() {
+        url = "https://bugs.php.net/report.php?bug_type=Documentation+problem&amp;manpage=" + $(this).parent().parent().attr("id") + "%23" + $(this).parent().attr("id");
+        $(this).parent().prepend("<div class='reportbug'><a href='" + url + "'>Report a bug</a></div>");
+        $(this).prepend("<a class='toggler shown' href='#'><img src='/images/notes-reject.gif' alt='reject note' /></a> ");
+    });
+    $("#usernotes .head").each(function() {
+        $(this).prepend("<a class='toggler shown' href='#'><img src='/images/notes-reject.gif' alt='reject note' /></a> ");
+    });
+    $(".soft-deprecation-notice h1.title .toggler").click(function() {
+        $(this).parent().siblings().slideToggle("slow");
+        toggleImage(this);
+        return false;
+    });
+    $(".refsect1 h3.title .toggler").click(function() {
+        $(this).parent().siblings().slideToggle("slow");
+        toggleImage(this);
+        return false;
+    });
+    $("#usernotes .head .toggler").click(function() {
+        $(this).parent().next().slideToggle("slow");
+        toggleImage(this);
+        return false;
+    });
+});
+</script>
+
+</head>
+<body>
+
+<div id="headnav">
+ <a href="/" rel="home"><img src="/images/php.gif"
+ alt="PHP" width="120" height="67" id="phplogo" /></a>
+ <div id="headmenu">
+  <a href="/downloads.php">downloads</a> |
+  <a href="/docs.php">documentation</a> |
+  <a href="/FAQ.php">faq</a> |
+  <a href="/support.php">getting help</a> |
+  <a href="/mailing-lists.php">mailing lists</a> |
+  <a href="/license">licenses</a> |
+  <a href="https://wiki.php.net/">wiki</a> |
+  <a href="https://bugs.php.net/">reporting bugs</a> |
+  <a href="/sites.php">php.net sites</a> |
+  <a href="/conferences/">conferences</a> |
+  <a href="/my.php">my php.net</a>
+ </div>
+</div>
+
+<div id="headsearch">
+ <form method="post" action="/search.php" id="topsearch">
+  <p>
+   <span title="Keyboard shortcut: Alt+S (Win), Ctrl+S (Apple)">
+    <span class="shortkey">s</span>earch for
+   </span>
+   <input type="text" name="pattern" value="" size="30" accesskey="s" />
+   <span>in the</span>
+   <select name="show">
+    <option value="all"      >all php.net sites</option>
+    <option value="local"    >this mirror only</option>
+    <option value="quickref" selected="selected">function list</option>
+    <option value="manual"   >online documentation</option>
+    <option value="bugdb"    >bug database</option>
+    <option value="news_archive">Site News Archive</option>
+    <option value="changelogs">All Changelogs</option>
+    <option value="pear"     >just pear.php.net</option>
+    <option value="pecl"     >just pecl.php.net</option>
+    <option value="talks"    >just talks.php.net</option>
+    <option value="maillist" >general mailing list</option>
+    <option value="devlist"  >developer mailing list</option>
+    <option value="phpdoc"   >documentation mailing list</option>
+   </select>
+   <input type="image"
+          src="/images/small_submit_white.gif"
+          class="submit" alt="search" />
+   <input type="hidden" name="lang" value="en" />
+  </p>
+ </form>
+</div>
+
+<div id="layout_2">
+ <div id="leftbar">
+<!--UdmComment-->
+<ul class="toc">
+ <li class="header home"><a href="index.php">PHP Manual</a></li>
+ <li class="header up"><a href="funcref.php">Function Reference</a></li>
+ <li class="header up"><a href="refs.xml.php">XML Manipulation</a></li>
+ <li class="header up"><a href="book.dom.php">DOM</a></li>
+ <li><a href="intro.dom.php">Introduction</a></li>
+ <li><a href="dom.setup.php">Installing/Configuring</a></li>
+ <li><a href="dom.constants.php">Predefined Constants</a></li>
+ <li><a href="class.domattr.php">DOMAttr</a></li>
+ <li><a href="class.domcdatasection.php">DOMCdataSection</a></li>
+ <li><a href="class.domcharacterdata.php">DOMCharacterData</a></li>
+ <li><a href="class.domcomment.php">DOMComment</a></li>
+ <li><a href="class.domdocument.php">DOMDocument</a></li>
+ <li><a href="class.domdocumentfragment.php">DOMDocumentFragment</a></li>
+ <li><a href="class.domdocumenttype.php">DOMDocumentType</a></li>
+ <li><a href="class.domelement.php">DOMElement</a></li>
+ <li><a href="class.domentity.php">DOMEntity</a></li>
+ <li><a href="class.domentityreference.php">DOMEntityReference</a></li>
+ <li><a href="class.domexception.php">DOMException</a></li>
+ <li><a href="class.domimplementation.php">DOMImplementation</a></li>
+ <li><a href="class.domnamednodemap.php">DOMNamedNodeMap</a></li>
+ <li><a href="class.domnode.php">DOMNode</a></li>
+ <li class="active"><a href="class.domnodelist.php">DOMNodeList</a></li>
+ <li><a href="class.domnotation.php">DOMNotation</a></li>
+ <li><a href="class.domprocessinginstruction.php">DOMProcessingInstruction</a></li>
+ <li><a href="class.domtext.php">DOMText</a></li>
+ <li><a href="class.domxpath.php">DOMXPath</a></li>
+ <li><a href="ref.dom.php">DOM Functions</a></li>
+</ul><!--/UdmComment-->
+
+ </div>
+ <div id="content" class="manual/en">
+<!--UdmComment-->
+<div class="manualnavbar manualnavbar_top">
+ <span class="next">
+  <a href="domnodelist.item.php">DOMNodelist::item<img src="/images/caret-r.gif" alt="&gt;" width="11" height="7" /></a>
+ </span>
+ <span class="prev">
+  <a href="domnode.replacechild.php"><img src="/images/caret-l.gif" alt="&lt;" width="11" height="7" />DOMNode::replaceChild</a>
+ </span>
+ <hr />
+ <span class="lastupdated">[<a href="https://edit.php.net/?project=PHP&amp;perm=en/class.domnodelist.php">edit</a>] Last updated: Fri, 16 Nov 2012</span>
+ <div class="langchooser">
+  <form action="/manual/change.php" method="get">
+   <p>view this page in </p><fieldset><select name="page">
+    <option value="pt_BR/class.domnodelist.php">Brazilian Portuguese</option>
+    <option value="zh/class.domnodelist.php">Chinese (Simplified)</option>
+    <option value="fr/class.domnodelist.php">French</option>
+    <option value="de/class.domnodelist.php">German</option>
+    <option value="it/class.domnodelist.php">Italian</option>
+    <option value="ja/class.domnodelist.php">Japanese</option>
+    <option value="pl/class.domnodelist.php">Polish</option>
+    <option value="ro/class.domnodelist.php">Romanian</option>
+    <option value="ru/class.domnodelist.php">Russian</option>
+    <option value="fa/class.domnodelist.php">Persian</option>
+    <option value="es/class.domnodelist.php">Spanish</option>
+    <option value="tr/class.domnodelist.php">Turkish</option>
+    <option value="help-translate.php">Other</option>
+   </select>
+   <input type="image" src="/images/small_submit.gif" id="changeLangImage" alt="Change language" />
+  </fieldset></form>
+ </div>
+</div>
+<!--/UdmComment-->
+
+<div id="class.domnodelist" class="reference">
+ <h1 class="title">The DOMNodeList class</h1>
+ 
+ 
+ <div class="partintro"><p class="verinfo">(PHP 5)</p>
+ 
+
+
+
+ 
+  <div class="section" id="domnodelist.synopsis">
+   <h2 class="title">Class synopsis</h2>
+ 
+
+   <div class="classsynopsis">
+    <div class="ooclass"></div>
+
+    <span class="oointerface">
+      <span class="interfacename"><a href="class.traversable.php" class="interfacename">Traversable</a></span>
+    </span>
+
+
+    <div class="classsynopsisinfo">
+     <span class="ooclass">
+      <strong class="classname">DOMNodeList</strong>
+     </span>
+ 
+     {</div>
+
+ 
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* Properties */</div>
+
+    <div class="fieldsynopsis">
+     <span class="modifier">readonly</span>
+     <span class="modifier">public</span>
+     <span class="type">int</span>
+      <var class="varname"><a href="class.domnodelist.php#domnodelist.props.length">$<var class="varname">length</var></a></var>
+    ;</div>
+
+ 
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* Methods */</div>
+    <div class="methodsynopsis dc-description">
+   <span class="type">DOMNode</span> <span class="methodname"><a href="domnodelist.item.php" class="methodname">DOMNodelist::item</a></span>
+    ( <span class="methodparam"><span class="type">int</span> <code class="parameter">$index</code></span>
+   )</div>
+
+ 
+   }</div>
+
+ 
+  </div>
+ 
+
+  <div class="section" id="domnodelist.props">
+   <h2 class="title">Properties</h2>
+   <dl>
+
+    <dt id="domnodelist.props.length">
+     <span class="term"><var class="varname"><var class="varname">length</var></var></span>
+     <dd>
+
+      <p class="para">
+       The number of nodes in the list. The range of valid child node 
+       indices is 0 to <em>length - 1</em> inclusive.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </div>
+
+  
+
+
+
+ 
+ </div>
+ 
+ 
+
+
+
+
+
+
+ 
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="domnodelist.item.php">DOMNodelist::item</a> — Retrieves a node specified by index</li></ul>
+</div>
+<br /><br /><!--UdmComment-->
+<div class="manualnavbar manualnavbar_bottom">
+ <span class="next">
+  <a href="domnodelist.item.php">DOMNodelist::item<img src="/images/caret-r.gif" alt="&gt;" width="11" height="7" /></a>
+ </span>
+ <span class="prev">
+  <a href="domnode.replacechild.php"><img src="/images/caret-l.gif" alt="&lt;" width="11" height="7" />DOMNode::replaceChild</a>
+ </span>
+ <hr />
+ <span class="lastupdated">[<a href="https://edit.php.net/?project=PHP&amp;perm=en/class.domnodelist.php">edit</a>] Last updated: Fri, 16 Nov 2012</span>
+ <div class="langchooser">
+  &nbsp;
+ </div>
+</div>
+<!--/UdmComment-->
+
+
+<div id="usernotes">
+ <div class="head">
+  <span class="action"><a href="/manual/add-note.php?sect=class.domnodelist&amp;redirect=http://us1.php.net/manual/en/class.domnodelist.php"><img src="/images/notes-add.gif" alt="add a note" width="13" height="13" class="middle" /></a> <small><a href="/manual/add-note.php?sect=class.domnodelist&amp;redirect=http://us1.php.net/manual/en/class.domnodelist.php">add a note</a></small></span>
+  <small>User Contributed Notes</small>
+  <strong>DOMNodeList</strong>
+ </div><div id="allnotes">
+ <a name="109301"></a>
+ <div class="note">
+  <strong class='user'>ignitedfirestarter at gmail dot com</strong>
+  <a href="#109301" class="date">04-Jul-2012 10:39</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+If you want to recurse over a DOM then this might help: <br />
+<span class="default">&lt;?php <br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* PHP's DOM classes are recursive but don't provide an implementation of <br />
+&nbsp;* RecursiveIterator. This class provides a RecursiveIterator for looping over DOMNodeList<br />
+&nbsp;*/<br />
+</span><span class="keyword">class </span><span class="default">DOMNodeRecursiveIterator </span><span class="keyword">extends </span><span class="default">ArrayIterator </span><span class="keyword">implements </span><span class="default">RecursiveIterator </span><span class="keyword">{<br />
+&nbsp; <br />
+&nbsp; public function </span><span class="default">__construct </span><span class="keyword">(</span><span class="default">DOMNodeList $node_list</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$nodes </span><span class="keyword">= array();<br />
+&nbsp;&nbsp;&nbsp; foreach(</span><span class="default">$node_list </span><span class="keyword">as </span><span class="default">$node</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$nodes</span><span class="keyword">[] = </span><span class="default">$node</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$nodes</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp; }<br />
+&nbsp; <br />
+&nbsp; public function </span><span class="default">getRecursiveIterator</span><span class="keyword">(){<br />
+&nbsp;&nbsp;&nbsp; return new </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">, </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">::</span><span class="default">SELF_FIRST</span><span class="keyword">);<br />
+&nbsp; }<br />
+&nbsp; <br />
+&nbsp; public function </span><span class="default">hasChildren </span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">current</span><span class="keyword">()-&gt;</span><span class="default">hasChildNodes</span><span class="keyword">();<br />
+&nbsp; }<br />
+<br />
+&nbsp; <br />
+&nbsp; public function </span><span class="default">getChildren </span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; return new </span><span class="default">self</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">current</span><span class="keyword">()-&gt;</span><span class="default">childNodes</span><span class="keyword">);<br />
+&nbsp; }<br />
+&nbsp; <br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+ <a name="97986"></a>
+ <div class="note">
+  <strong class='user'>geompse at gmail dot com</strong>
+  <a href="#97986" class="date">19-May-2010 08:39</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+Note that $length is calculated (php5.3.2).<br />
+Iterating over a large NodeList may be time expensive.<br />
+<br />
+Prefer :<br />
+$nb = $nodelist-&gt;length;<br />
+for($pos=0; $pos&lt;$nb; $pos++)<br />
+<br />
+Than:<br />
+for($pos=0; $pos&lt;$nodelist-&gt;length; $pos++)<br />
+<br />
+I had a hard time figuring that out...</span>
+</code></div>
+  </div>
+ </div>
+ <a name="85813"></a>
+ <div class="note">
+  <strong class='user'>nascoedu</strong>
+  <a href="#85813" class="date">18-Sep-2008 03:44</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+Get some nodes from an existing xml file and add them to a new file:<br />
+<br />
+<span class="default">&lt;?php<br />
+$dom </span><span class="keyword">= new </span><span class="default">DOMDocument</span><span class="keyword">;<br />
+</span><span class="default">$dom</span><span class="keyword">-&gt;</span><span class="default">load</span><span class="keyword">(</span><span class="default">$xmlsource</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/*create the xPath object _after_&nbsp; loading the xml source, otherwise the query won't work:*/<br />
+</span><span class="default">$xPath </span><span class="keyword">= new </span><span class="default">DOMXPath</span><span class="keyword">(</span><span class="default">$dom</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/*now get the nodes in a DOMNodeList:*/<br />
+</span><span class="default">$nodeList </span><span class="keyword">= </span><span class="default">$xPath</span><span class="keyword">-&gt;</span><span class="default">query</span><span class="keyword">(</span><span class="default">$anXPathExpr</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/*create a new DOMDocument and add a root element:*/<br />
+</span><span class="default">$newDom </span><span class="keyword">= new </span><span class="default">DOMDocument</span><span class="keyword">(</span><span class="string">'1.0'</span><span class="keyword">,</span><span class="string">'UTF-8'</span><span class="keyword">);<br />
+</span><span class="default">$root </span><span class="keyword">= </span><span class="default">$newDom</span><span class="keyword">-&gt;</span><span class="default">createElement</span><span class="keyword">(</span><span class="string">'root'</span><span class="keyword">);<br />
+</span><span class="default">$root </span><span class="keyword">= </span><span class="default">$newDom</span><span class="keyword">-&gt;</span><span class="default">appendChild</span><span class="keyword">(</span><span class="default">$root</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/* append all nodes from $nodeList to the new dom, as children of $root:*/<br />
+</span><span class="keyword">foreach (</span><span class="default">$nodeList </span><span class="keyword">as </span><span class="default">$domElement</span><span class="keyword">){<br />
+&nbsp;&nbsp; </span><span class="default">$domNode </span><span class="keyword">= </span><span class="default">$newDom</span><span class="keyword">-&gt;</span><span class="default">importNode</span><span class="keyword">(</span><span class="default">$domElement</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">);<br />
+&nbsp;&nbsp; </span><span class="default">$root</span><span class="keyword">-&gt;</span><span class="default">appendChild</span><span class="keyword">(</span><span class="default">$domNode</span><span class="keyword">);<br />
+}<br />
+</span><span class="comment">/*please note: importNode does not cast a DOMElement to a DOMNode!*/<br />
+<br />
+/*save the new dom */<br />
+</span><span class="keyword">echo </span><span class="string">'Wrote: ' </span><span class="keyword">. </span><span class="default">$newDom</span><span class="keyword">-&gt;</span><span class="default">save</span><span class="keyword">(</span><span class="string">'newDOM.xml'</span><span class="keyword">) . </span><span class="string">' bytes'</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+the following won't work and you'll end up with a DOMException: 'Wrong Document Error' (at least I did):<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">foreach (</span><span class="default">$nodeList </span><span class="keyword">as </span><span class="default">$element</span><span class="keyword">){<br />
+&nbsp;&nbsp; </span><span class="default">$root</span><span class="keyword">-&gt;</span><span class="default">appendChild</span><span class="keyword">(</span><span class="default">$element</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Cheers! ;-)<br />
+---<br />
+WindowsXP, WAMP5 (appache 2.2.6), PHP 5.2.5, DOM/XML API Version 20031129, libxml 2.6.26<br />
+---</span>
+</code></div>
+  </div>
+ </div>
+ <a name="85384"></a>
+ <div class="note">
+  <strong class='user'>c dot 1 at smithies dot org</strong>
+  <a href="#85384" class="date">27-Aug-2008 03:26</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+I doubt the accuracy of what saad105050 wrote below. In particular, in his example, he seems to assume that $element-&gt;getElementsByTagName() will return NULL if there are no matching nodes. This is not what happens; as per the documentation, a DOMNodeList is returned with the length property zero.</span>
+</code></div>
+  </div>
+ </div>
+ <a name="85335"></a>
+ <div class="note">
+  <strong class='user'>bobvandell at hotmail dot com</strong>
+  <a href="#85335" class="date">26-Aug-2008 09:12</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+That's actually incorrect. You can use function results as objects. It makes building an API for your database very clean and neat. For example:<br />
+<br />
+Our code:<br />
+<br />
+$articles = Node::screate('tags', 123456)-&gt;assets('like:title:test')-&gt;articles;<br />
+<br />
+We use the above code to get articles that are linked to assets that are linked to a specific tag in our database.</span>
+</code></div>
+  </div>
+ </div>
+ <a name="83390"></a>
+ <div class="note">
+  <strong class='user'>c dot 1 at smithies dot org</strong>
+  <a href="#83390" class="date">23-May-2008 05:43</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+You can modify, and even delete, nodes from a DOMNodeList if you iterate backwards:<br />
+<br />
+$els = $document-&gt;getElementsByTagName('input');<br />
+for ($i = $els-&gt;length; --$i &gt;= 0; ) {<br />
+&nbsp; $el = $els-&gt;item($i);<br />
+&nbsp; switch ($el-&gt;getAttribute('name')) {<br />
+&nbsp;&nbsp;&nbsp; case 'MAX_FILE_SIZE' :<br />
+&nbsp;&nbsp; &nbsp;&nbsp; $el-&gt;parentNode-&gt;removeChild($el);<br />
+&nbsp;&nbsp;&nbsp; break;<br />
+&nbsp;&nbsp;&nbsp; case 'inputfile' :<br />
+&nbsp;&nbsp; &nbsp;&nbsp; $el-&gt;setAttribute('type', 'text');<br />
+&nbsp;&nbsp;&nbsp; //break;<br />
+&nbsp; }<br />
+}</span>
+</code></div>
+  </div>
+ </div>
+ <a name="83180"></a>
+ <div class="note">
+  <strong class='user'>drichter at muvicom dot de</strong>
+  <a href="#83180" class="date">14-May-2008 06:11</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+Addition to my first note:<br />
+<br />
+An traditional for-loop does not allow you to change the DOM-tree while looping - the effects are the nearly the same as with foreach. So you have to collect the nodes in an array and do the tree-altering stuff within a second loop (looping the array this time ...)</span>
+</code></div>
+  </div>
+ </div>
+ <a name="83178"></a>
+ <div class="note">
+  <strong class='user'>drichter at muvicom dot de</strong>
+  <a href="#83178" class="date">14-May-2008 04:56</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+I have done some testing and have found 2 results:<br />
+(My System: Win XP with PHP 5.2.1)<br />
+<br />
+1) Iteration with foreach does function correctly as "james dot j dot hackett at gmail dot com" writes, _if_ you only do readonly stuff with foreach or minor writings of some attributes.<br />
+<br />
+2) foreach does not function, if you are doing some DOM-Operations while iterating. In my situation it was adding the iterated $node as an child to an new node:<br />
+<br />
+$newNode = $dom-&gt;createElement('newNode') ;<br />
+foreach ($nodeList as $node) {<br />
+&nbsp; echo $node-&gt;nodeValue ;<br />
+&nbsp; $newNode-&gt;appendChild($node) ;<br />
+}<br />
+<br />
+This only gives you the first element ...<br />
+<br />
+I'm interpreting it as an confusing but correct behavior because of the changes within the $dom-object while appending the node at an additional place ... <br />
+<br />
+So, if you want to do something like 2) use for, length and item() :)</span>
+</code></div>
+  </div>
+ </div>
+ <a name="83068"></a>
+ <div class="note">
+  <strong class='user'>james dot j dot hackett at gmail dot com</strong>
+  <a href="#83068" class="date">08-May-2008 09:47</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+In Response to 'kassah at gmail'<br />
+<br />
+You don't need to convert a DOMNodeList to an array in order iterate through it using 'foreach'.&nbsp; You can use foreach directly with the DOMNodeList.<br />
+<br />
+$nodeList = $someDomDocument-&gt;getElementsbytagname('user');<br />
+<br />
+foreach ($nodeList as $node) {<br />
+&nbsp;&nbsp;&nbsp; echo $node-&gt;nodeValue;<br />
+}</span>
+</code></div>
+  </div>
+ </div>
+ <a name="82975"></a>
+ <div class="note">
+  <strong class='user'>kassah at gmail dot com</strong>
+  <a href="#82975" class="date">04-May-2008 05:06</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+// Converts a DOMNodeList to an Array that can be easily foreached<br />
+function dnl2array($domnodelist) {<br />
+&nbsp;&nbsp;&nbsp; $return = array();<br />
+&nbsp;&nbsp;&nbsp; for ($i = 0; $i &lt; $domnodelist-&gt;length; ++$i) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $return[] = $domnodelist-&gt;item($i);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return $return;<br />
+}</span>
+</code></div>
+  </div>
+ </div>
+ <a name="82668"></a>
+ <div class="note">
+  <strong class='user'>brack at wjp dot de</strong>
+  <a href="#82668" class="date">21-Apr-2008 02:35</a>
+  <div class="text">
+<div class="phpcode"><code><span class="html">
+In PHP 5.2.5 (Windows) it is not possible to iterate correctly over the DOMNodeList object returned by DOMNode-&gt;childNodes using foreach. Instead I had to use the for loop in conjunction with the item() method of DOMNodeList for iterating over all child nodes correctly.<br />
+<br />
+I don't know whether this is really a bug, but apparently it is.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ <div class="foot"><a href="/manual/add-note.php?sect=class.domnodelist&amp;redirect=http://us1.php.net/manual/en/class.domnodelist.php"><img src="/images/notes-add.gif" alt="add a note" width="13" height="13" class="middle" /></a> <small><a href="/manual/add-note.php?sect=class.domnodelist&amp;redirect=http://us1.php.net/manual/en/class.domnodelist.php">add a note</a></small></div>
+</div><br />
+ </div>
+ <div class="cleaner">&nbsp;</div>
+</div>
+
+<div id="footnav">
+   <a href="/source.php?url=/manual/en/class.domnodelist.php">show source</a> |
+ <a href="/credits.php">credits</a> |
+ <a href="/sitemap.php">sitemap</a> |
+ <a href="/contact.php">contact</a> |
+ <a href="/contact.php#ads">advertising</a> |
+ <a href="/mirrors.php">mirror sites</a>
+</div>
+
+<div id="pagefooter">
+ <div id="copyright">
+  <a href="/copyright.php">Copyright &copy; 2001-2012 The PHP Group</a><br />
+  All rights reserved.
+ </div>
+
+ <div id="thismirror">
+  <a href="/mirror.php">This mirror</a> generously provided by:
+  <a href="http://www.nexcess.net/">NEXCESS.NET</a><br />
+  Last updated: Fri Nov 23 02:41:04 2012 UTC
+ </div>
+</div>
+<!--[if IE 6]>
+<script type="text/javascript">
+    /*Load jQuery if not already loaded*/ if(typeof jQuery == 'undefined'){ document.write("<script type=\"text/javascript\"   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\"></"+"script>"); var __noconflict = true; }
+    var IE6UPDATE_OPTIONS = {
+        icons_path: "/ie6update/images/"
+    }
+</script>
+<script type="text/javascript" src="/ie6update/ie6update.js"></script>
+<![endif]-->
+</body>
+</html>
